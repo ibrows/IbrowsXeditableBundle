@@ -60,7 +60,7 @@ class XeditableFormMapper extends AbstractFormXeditableMapper
         $path = $request->request->get('path');
         $subform = $this->getFormByPath($path, null, true);
 
-        $this->form->submit($request->request->get($this->form->getName()));
+        $this->form->handleRequest($request);
 
         if ($this->validator) {
             $this->validate($subform);
@@ -172,10 +172,6 @@ class XeditableFormMapper extends AbstractFormXeditableMapper
         } else {
             $parentData = $subform->getData();
             $subform->getConfig()->getOption('validation_groups');
-        }
-
-        foreach ($subform as $subsubform) {
-            $this->validate($subsubform);
         }
 
         $constraintViolationList = $this->validator->validateProperty($parentData, $path, $validationGroups);
