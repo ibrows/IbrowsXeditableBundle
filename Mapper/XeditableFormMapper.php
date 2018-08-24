@@ -184,8 +184,8 @@ class XeditableFormMapper extends AbstractFormXeditableMapper
                     new FormError(
                         $violation->getMessage(),
                         $violation->getMessageTemplate(),
-                        $violation->getMessageParameters(),
-                        $violation->getMessagePluralization()
+                        $violation->getParameters(),
+                        $violation->getPlural()
                     )
                 );
             }
