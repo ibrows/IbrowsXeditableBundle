@@ -103,8 +103,19 @@ class XeditableFormMapper extends AbstractFormXeditableMapper
             $attributes
         );
 
+        $xAttributes = [];
+        if (array_key_exists('x-attributes', $attributes)) {
+            $xAttributes = $attributes['x-attributes'];
+            unset($attributes['x-attributes']);
+        }
+        $xOptions = [];
+        if (array_key_exists('x-options', $options)) {
+            $xOptions = $options['x-options'];
+            unset($options['x-options']);
+        }
+
         if ($this->getRenderFormPrototype($options)) {
-            $rendredFormXeditable = $this->renderXeditable($path);
+            $rendredFormXeditable = $this->renderXeditable($path, $xAttributes, $xOptions);
             $attributes['data-form'] = $rendredFormXeditable;
         }
 
